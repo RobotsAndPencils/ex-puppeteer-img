@@ -23,14 +23,16 @@ defmodule PuppeteerImg.MixProject do
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
-    []
+    [
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+    ]
   end
 
   defp package do
     [
       maintainers: ["Robots & Pencils"],
       licenses: ["MIT"],
-      links: %{github: "https://github.com/RobotsAndPencils/puppeteer_img"}
+      links: %{github: "https://github.com/RobotsAndPencils/ex-puppeteer-img"}
     ]
   end
 end
