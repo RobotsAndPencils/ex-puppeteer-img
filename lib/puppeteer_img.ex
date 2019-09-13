@@ -11,28 +11,32 @@ defmodule PuppeteerImg do
         result ++ ["--#{key}=#{value}"]
       end)
 
-    task =
-      Task.async(fn ->
-        try do
-          case System.cmd("puppeteer-img", options) do
-            {_, 127} ->
-              {:error, :invalid_exec_path}
-
-            {cmd_response, _} ->
-              {:ok, cmd_response}
-          end
-        rescue
-          e in ErlangError ->
-            %ErlangError{original: error} = e
-
-            case error do
-              :enoent ->
-                # This will happen when the file in exec_path doesn't exists
+    try do
+      task =
+        Task.async(fn ->
+          try do
+            case System.cmd("puppeteer-img", options) do
+              {_, 127} ->
                 {:error, :invalid_exec_path}
-            end
-        end
-      end)
 
-    Task.await(task, options[:timeout] || 5000)
+              {cmd_response, _} ->
+                {:ok, cmd_response}
+            end
+          rescue
+            e in ErlangError ->
+              %ErlangError{original: error} = e
+
+              case error do
+                :enoent ->
+                  # This will happen when the file in exec_path doesn't exists
+                  {:error, :invalid_exec_path}
+              end
+          end
+        end)
+
+      Task.await(task, options[:timeout] || 2000)
+    catch
+      :exit, {:timeout, _} -> {:error, :timeout}
+    end
   end
 end
