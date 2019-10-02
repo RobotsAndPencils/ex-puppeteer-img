@@ -6,9 +6,9 @@ defmodule PuppeteerImg do
   def generate_image(url, options \\ []) do
     options =
       options
-      |> Keyword.take([:type, :path, :width, :height])
+      |> Keyword.take([:type, :path, :width, :height, :scale_factor])
       |> Enum.reduce([url], fn {key, value}, result ->
-        result ++ ["--#{key}=#{value}"]
+        result ++ [String.replace("--#{key}=#{value}", "_", "-")]
       end)
 
     try do

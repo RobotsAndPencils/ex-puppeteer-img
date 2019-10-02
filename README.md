@@ -15,7 +15,7 @@ Then add the following dependency to your Elixir project
 ```elixir
 def deps do
   [
-    {:puppeteer_img, "~> 0.1.1"}
+    {:puppeteer_img, "~> 0.1.2"}
   ]
 end
 ```
@@ -38,9 +38,10 @@ end
 
 ```elixir
 options = [
-  type: "png", # The file type to generate. Options are jpeg or png. Defaults to png.
+  type: "png", # The file type to generate. Options are "jpeg" or "png". Defaults to png.
   path: "/screenshots/example.png", # The file path to save the image to.
-  width: 400, # The width of the browser viewport. Default is 800
-  height: 800 # The height of the browser viewport. Default is 600
+  width: 400, # The width of the browser viewport. Default is 800.
+  height: 800 # The height of the browser viewport. Default is 600.
+  scale_factor: 1 # Sets the device pixel scale factor when setting the viewport.  Defaults to 1.
 ]
 ```
