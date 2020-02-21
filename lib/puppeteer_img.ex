@@ -4,7 +4,7 @@ defmodule PuppeteerImg do
   """
 
   def generate_image(url, options \\ []) do
-    options =
+    opts =
       options
       |> Keyword.take([:type, :path, :width, :height, :scale_factor])
       |> Enum.reduce([url], fn {key, value}, result ->
@@ -15,7 +15,7 @@ defmodule PuppeteerImg do
       task =
         Task.async(fn ->
           try do
-            case System.cmd("puppeteer-img", options) do
+            case System.cmd("puppeteer-img", opts) do
               {_, 127} ->
                 {:error, :invalid_exec_path}
 

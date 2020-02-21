@@ -15,7 +15,7 @@ Then add the following dependency to your Elixir project
 ```elixir
 def deps do
   [
-    {:puppeteer_img, "~> 0.1.2"}
+    {:puppeteer_img, "~> 0.1.3"}
   ]
 end
 ```
